@@ -1,7 +1,8 @@
 import { test, expect, Page } from '@playwright/test';
-import { loginIntoRecsUI } from "./components/loginPage";
-import * as ReconciliationStrategy from "./components/reconciliationStrategy";
-import * as commonFormat from "./commonTs/commonts"
+import { loginIntoRecsUI } from "../smartrecs/recsPages/loginPage";
+import * as ReconciliationStrategy from "../smartrecs/recsPages/reconciliationStrategy";
+import * as commonFormat from "../smartrecs/objectRepo/commonts"
+
 
 
 class Strategy {

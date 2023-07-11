@@ -1,6 +1,6 @@
 import { Page, test, Expect, expect } from "@playwright/test";
-import * as nav from '../common/navigatetomenufromhomepage';
-import * as commonFormat from "../commonTs/commonts";
+import * as nav from '../common/premiumCommonAdmin';
+import * as commonFormat from "../recsPages/objectRepo/commonts";
 
 
 async function ReconciliationPageLoaded(page: Page) {
