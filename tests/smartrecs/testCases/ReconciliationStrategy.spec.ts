@@ -1,7 +1,7 @@
-import { test, expect, Page } from '@playwright/test';
-import { loginIntoRecsUI } from "../smartrecs/recsPages/loginPage";
-import * as ReconciliationStrategy from "../smartrecs/recsPages/reconciliationStrategy";
-import * as commonFormat from "../smartrecs/objectRepo/commonts"
+import { test, expect, Page, request } from '@playwright/test';
+import { loginIntoRecsUI } from "../recsPages/loginPage";
+import * as ReconciliationStrategy from "../recsPages/reconciliationStrategy";
+import * as commonFormat from "../library/objectRepo/commonts"
 
 
 
@@ -38,4 +38,14 @@ class Strategy {
 test('Verify pass details on strategy', async ({ page }) => {
   const strategy = new Strategy(page);
   await strategy.viewPassDetailsOnStrategy();
+
 });
+
+test.beforeAll(async () => {
+
+  const payload = {
+    "username": "guna",
+    "password": "pwd1"
+  }
+  
+})
