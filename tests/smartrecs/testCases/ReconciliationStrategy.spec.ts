@@ -31,6 +31,7 @@ class Strategy {
     await ReconciliationStrategy.NavigateToReconciliationStrategy(this.page);
     await ReconciliationStrategy.viewStrategy(this.page, "TLM Cash Auto Match");
     await ReconciliationStrategy.verifyPassDetails(this.page, this.cashPassDetail);
+    await ReconciliationStrategy.vt_reconStrategy_pass_screen(this.page);
   }
 };
 
@@ -41,11 +42,3 @@ test('Verify pass details on strategy', async ({ page }) => {
 
 });
 
-test.beforeAll(async () => {
-
-  const payload = {
-    "username": "guna",
-    "password": "pwd1"
-  }
-  
-})

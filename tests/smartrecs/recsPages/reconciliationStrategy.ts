@@ -1,6 +1,6 @@
 import { Page, test, Expect, expect } from "@playwright/test";
-import * as nav from '../common/premiumCommonAdmin';
-import * as commonFormat from "../recsPages/objectRepo/commonts";
+import * as nav from '../library/common/premiumCommonAdmin';
+import * as commonFormat from "../library/objectRepo/commonts";
 
 
 async function ReconciliationPageLoaded(page: Page) {
@@ -39,6 +39,11 @@ export async function viewStrategy(page: Page, strategyName: string) {
     await waitForStrategyToOpen.waitFor();
     page.waitForLoadState();
     await page.locator("div[class='pass name']").last().waitFor();
+    await page.waitForSelector('div.card-container.pass', { state: 'visible' });
+    await page.waitForTimeout(3000);
+    const attributes = page.locator("//*[@data-locator='attributes-tab']//div[@uib-tooltip]");
+    await attributes.last().waitFor();
+    
 }
 
 
@@ -55,5 +60,12 @@ export async function verifyPassPresent(page: Page, passName: string, atPosition
     const targetPassName = page.locator(`(//div[@class='pass name'])[${atPosition}]//div[normalize-space(text())='${passName}']`)
     await expect(targetPassName).toBeVisible();
 
+
+}
+
+export async function vt_reconStrategy_pass_screen(page: Page) {
+
+    await page.screenshot({path:'pass_screenshot.png'});
+    // await expect(await page.screenshot()).toMatchSnapshot('PassScreenshot.png');
 
 }
