@@ -1,8 +1,9 @@
 import { test, expect, Page, request } from '@playwright/test';
-import { loginRecs } from "../recsPages/LoginPageScreen";
+import {ObjectServer} from "../recsPages/ObjectServer"
 
 test('Regression - TCA0000001 - I validate error message is displayed on invalid login', async ({ page }) => {
-   const loginObj = new loginRecs(page);
+   const ObjectRep = new ObjectServer(page);
+   const loginObj = ObjectRep.getLoginObj();
    await loginObj.invalidCredentialsLoginIntoRecsUI("user5", "password");
 
 });
