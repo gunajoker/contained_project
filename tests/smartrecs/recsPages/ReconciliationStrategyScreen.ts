@@ -1,13 +1,22 @@
 import { Page, test, Expect, expect } from "@playwright/test";
 import { navigateToDashboardRECS } from './HomeScreen';
 
-
+/**
+ *  single pass name and its position . used with Type:passes as an array to validate all pass list in a strategy
+ */
 type pass = {
     name:string,
     position : number;
   }
+
+/**
+ *  Passes name and its positions are stored to test the same in order in reconciliations strategy
+ */
 export type passes = pass[];
 
+/**
+ * Strategy related all locators and functionalities are stored here
+ */
 export class strategy
 {
     readonly page:Page;
@@ -29,14 +38,18 @@ constructor(page:Page)
    
 }
 
-
+/**
+ * Waits until the page is loaded by validating the presence of search strategy box
+ */
 async ReconciliationPageLoaded() {
     this.page.waitForLoadState();
     await this.searchStrategybox.waitFor();
 
 }
 
-
+/**
+ * Wrapper method and goes to reconciliation strategy dashboard
+ */
 async NavigateToReconciliationStrategy() {
     // nav.networkwait(page);
     await this.navigationObj.navigateToDashboard("Reconciliation Strategies");
@@ -45,6 +58,9 @@ async NavigateToReconciliationStrategy() {
 
 }
 
+/**
+ * Searches for strategy in the strategy page
+ */
 async searchStrategy(strategyName: string) {
     await this.searchStrategybox.fill(strategyName);
     await this.page.waitForLoadState();
@@ -52,6 +68,9 @@ async searchStrategy(strategyName: string) {
     await searchResult.waitFor();
 }
 
+/**
+ * Views the strategy listed in the search result
+ */
 async viewStrategy(strategyName: string) {
     // nav.networkwait(page);
     this.searchStrategy(strategyName);
@@ -69,14 +88,18 @@ async viewStrategy(strategyName: string) {
 }
 
 
-
-
-async verifyPassDetails(pass) {
+/**
+ * Verifies passes are displayed in the same order as mentioned
+ */
+async verifyPassDetails(pass:passes) {
     pass.forEach(element => {
         this.verifyPassPresent(element.name, element.position);
     });
 }
 
+/**
+ * Verifies pass is present at mentioned position
+ */
 async verifyPassPresent(passName: string, atPosition: number) {
 
     const targetPassName = this.page.locator(`(//div[@class='pass name'])[${atPosition}]//div[normalize-space(text())='${passName}']`)
@@ -84,7 +107,9 @@ async verifyPassPresent(passName: string, atPosition: number) {
 
 
 }
-
+/**
+ * Takes screenshot of the reconciliation strategy . technically it is just the current page
+ */
 async reconStrategyPassScreenshot() {
     await this.page.screenshot({path:'pass_screenshot.png'});
     // await expect(await page.screenshot()).toMatchSnapshot('PassScreenshot.png');

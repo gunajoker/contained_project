@@ -1,3 +1,6 @@
+/**
+ * Navigation to all dashboards are handled here. Post login screen
+ */
 export class navigateToDashboardRECS
 {
     readonly page;
@@ -7,6 +10,9 @@ export class navigateToDashboardRECS
             this.page = page;
             
     }
+     /**
+     * Navigates to the given screen and waits for page to load
+     */
     async navigateToDashboard(dashboardName:string)
     {
         const targetDashboard = await this.page.locator("//div[@class='main-route']//a[normalize-space(.)='"+dashboardName+"']") ;
