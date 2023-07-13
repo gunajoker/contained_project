@@ -1,6 +1,6 @@
 import { test, expect, Page, request } from '@playwright/test';
-import { loginRecs } from "../recsPages/LoginPage";
-import * as strategyImport from "../recsPages/ReconciliationStrategy";
+import { loginRecs } from "../recsPages/LoginPageScreen";
+import * as strategyImport from "../recsPages/ReconciliationStrategyScreen";
 import * as premiumCommonImport from "../recsPages/HomeScreen"
 
 
