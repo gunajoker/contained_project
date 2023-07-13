@@ -1,71 +1,93 @@
 import { Page, test, Expect, expect } from "@playwright/test";
-import * as nav from '../library/common/premiumCommonAdmin';
-import * as commonFormat from "../library/objectRepo/commonts";
+import { navigateToDashboardRECS } from './HomeScreen';
 
 
-async function ReconciliationPageLoaded(page: Page) {
-    const searchStrategybox = page.locator("#txtSearchMatchStrategy");
-    page.waitForLoadState();
-    await searchStrategybox.waitFor();
+type pass = {
+    name:string,
+    position : number;
+  }
+export type passes = pass[];
+
+export class strategy
+{
+    readonly page:Page;
+    readonly searchStrategybox;
+    readonly createStrategyBtn;
+    readonly navigationObj;
+    readonly attributes;
+    
+
+constructor(page:Page)
+{
+    this.page = page;
+    this.searchStrategybox = this.page.locator("#txtSearchMatchStrategy");
+    this.createStrategyBtn = this.page.locator("//*[contains(@class, 'btn')][normalize-space(.)='Create Reconciliation Strategy']");
+    this.attributes = this.page.locator("//*[@data-locator='attributes-tab']//div[@uib-tooltip]");
+   
+    
+    this.navigationObj = new navigateToDashboardRECS(this.page);
+   
+}
+
+
+async ReconciliationPageLoaded() {
+    this.page.waitForLoadState();
+    await this.searchStrategybox.waitFor();
 
 }
 
 
-export async function NavigateToReconciliationStrategy(page: Page) {
+async NavigateToReconciliationStrategy() {
     // nav.networkwait(page);
-    await nav.navigateToDashboard(page, "Reconciliation Strategies");
+    await this.navigationObj.navigateToDashboard("Reconciliation Strategies");
     // page.waitForLoadState("networkidle");
-    const createStrategyBtn = page.locator("//*[contains(@class, 'btn')][normalize-space(.)='Create Reconciliation Strategy']");
-    ReconciliationPageLoaded(page);
+    this.ReconciliationPageLoaded();
 
 }
 
-export async function searchStrategy(page: Page, strategyName: string) {
-    const searchStrategybox = page.locator("#txtSearchMatchStrategy");
-    await searchStrategybox.fill(strategyName);
-    await page.waitForLoadState();
-    const searchResult = page.locator("//tr[(@id='match_strategy_row_')]//b[normalize-space(text())='" + strategyName + "']");
+async searchStrategy(strategyName: string) {
+    await this.searchStrategybox.fill(strategyName);
+    await this.page.waitForLoadState();
+    const searchResult = this.page.locator("//tr[(@id='match_strategy_row_')]//b[normalize-space(text())='" + strategyName + "']");
     await searchResult.waitFor();
 }
 
-export async function viewStrategy(page: Page, strategyName: string) {
+async viewStrategy(strategyName: string) {
     // nav.networkwait(page);
-    searchStrategy(page, strategyName);
-    const viewStrategyBtn = page.locator("//tr[(@id='match_strategy_row_')]//b[normalize-space(text())='" + strategyName + "']/ancestor::tr//a[normalize-space(.)='View']");
+    this.searchStrategy(strategyName);
+    const viewStrategyBtn = this.page.locator("//tr[(@id='match_strategy_row_')]//b[normalize-space(text())='" + strategyName + "']/ancestor::tr//a[normalize-space(.)='View']");
     // nav.networkwait(page);
     await viewStrategyBtn.click();
-    page.waitForLoadState();
-    const waitForStrategyToOpen = page.locator("//div[@id='strategyEditNameClickPoint'][normalize-space(text())='" + strategyName + "']");
+    this.page.waitForLoadState();
+    const waitForStrategyToOpen = this.page.locator("//div[@id='strategyEditNameClickPoint'][normalize-space(text())='" + strategyName + "']");
     await waitForStrategyToOpen.waitFor();
-    page.waitForLoadState();
-    await page.locator("div[class='pass name']").last().waitFor();
-    await page.waitForSelector('div.card-container.pass', { state: 'visible' });
-    await page.waitForTimeout(3000);
-    const attributes = page.locator("//*[@data-locator='attributes-tab']//div[@uib-tooltip]");
-    await attributes.last().waitFor();
-    
+    this.page.waitForLoadState();
+    await this.page.locator("div[class='pass name']").last().waitFor();
+    await this.page.waitForSelector('div.card-container.pass', { state: 'visible' });
+    await this.page.waitForTimeout(3000);
+    await this.attributes.last().waitFor();
 }
 
 
 
 
-export async function verifyPassDetails(page: Page, pass: commonFormat.passDetailsTable[]) {
+async verifyPassDetails(pass) {
     pass.forEach(element => {
-        verifyPassPresent(page, element.name, element.position);
+        this.verifyPassPresent(element.name, element.position);
     });
 }
 
-export async function verifyPassPresent(page: Page, passName: string, atPosition: number) {
+async verifyPassPresent(passName: string, atPosition: number) {
 
-    const targetPassName = page.locator(`(//div[@class='pass name'])[${atPosition}]//div[normalize-space(text())='${passName}']`)
+    const targetPassName = this.page.locator(`(//div[@class='pass name'])[${atPosition}]//div[normalize-space(text())='${passName}']`)
     await expect(targetPassName).toBeVisible();
 
 
 }
 
-export async function vt_reconStrategy_pass_screen(page: Page) {
-
-    await page.screenshot({path:'pass_screenshot.png'});
+async reconStrategyPassScreenshot() {
+    await this.page.screenshot({path:'pass_screenshot.png'});
     // await expect(await page.screenshot()).toMatchSnapshot('PassScreenshot.png');
+}
 
 }
