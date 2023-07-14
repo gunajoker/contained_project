@@ -1,7 +1,7 @@
 import { test, expect, Page, request } from "@playwright/test";
 import { ObjectServer } from "../recsPages/ObjectServer";
 
-test("@Regression- Verify pass details on strategy", async ({ page }) => {
+test.only("@Regression- Verify pass details on strategy", async ({ page }) => {
   const ObjectRep = new ObjectServer(page);
   const loginObj1 = ObjectRep.getLoginObj();
   const strategyObj1 = ObjectRep.getStrategyObj();

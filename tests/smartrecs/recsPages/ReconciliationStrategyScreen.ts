@@ -64,6 +64,8 @@ async NavigateToReconciliationStrategy() {
  */
 async searchStrategy(strategyName: string) {
       await this.searchStrategybox.fill(strategyName);
+      const searchResult = this.page.locator(`//tr[(@id='match_strategy_row_')]//b[normalize-space()='${strategyName}']`);
+      await expect.soft(searchResult).toBeVisible();
 }
 
 /**
@@ -71,7 +73,7 @@ async searchStrategy(strategyName: string) {
  */
 async viewStrategy(strategyName: string) {
     // nav.networkwait(page);
-    this.searchStrategy(strategyName);
+    await this.searchStrategy(strategyName);
     const viewStrategyBtn = this.page.locator("//tr[(@id='match_strategy_row_')]//b[normalize-space(text())='" + strategyName + "']/ancestor::tr//a[normalize-space(.)='View']");
     // nav.networkwait(page);
     await viewStrategyBtn.click();

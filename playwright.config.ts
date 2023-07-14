@@ -23,7 +23,7 @@ export default defineConfig({
   reporter: "html",
   timeout: 30 * 10 * 10 * 1000,
   expect: {
-    timeout: 15 * 10 * 1000,
+    timeout: 30 * 1000,
   },
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -32,8 +32,8 @@ export default defineConfig({
     baseURL: "http://192.168.200.11:7001/",
     headless: false,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "retain-on-failure",
-    screenshot: "only-on-failure",
+    trace: "on",
+    screenshot: "on",
     // globalTimeout: 60*60*1000,
     actionTimeout: 30 * 1000,
     navigationTimeout: 30 * 1000,
