@@ -1,38 +1,30 @@
-import { navigateToDashboardRECS } from './HomeScreen';
 import { Page, test, Expect, expect } from "@playwright/test";
 import { loginRecs } from "../recsPages/LoginPageScreen";
-import * as strategyImport from "../recsPages/ReconciliationStrategyScreen";
-import * as premiumCommonImport from "../recsPages/HomeScreen"
+import {  strategy } from "../recsPages/ReconciliationStrategyScreen";
+import { navigateToDashboardRECS} from "../recsPages/HomeScreen"
 
 export class ObjectServer {
     
-    readonly page;
-    readonly navigationObj;
-    readonly loginObj;
-    readonly strategyObj;
-    readonly premiumCommonObj;
-    readonly passFormat;
+    readonly page:Page;
+    readonly navigationObj:navigateToDashboardRECS;
+    readonly loginObj:loginRecs;
+    readonly strategyObj:strategy;
+    
 
     constructor(page:Page)
     {
         this.page=page;
-        this.navigationObj = new navigateToDashboardRECS(this.page);
-        this.loginObj = new loginRecs(this.page);
-        this.strategyObj = new strategyImport.strategy(this.page);
-        this.premiumCommonObj = new premiumCommonImport.navigateToDashboardRECS(this.page)
-    }
+     }
    
     getNavigationobj(){
-        return this.navigationObj;   
+        return new navigateToDashboardRECS(this.page)
     }
     getLoginObj(){
-        return this.loginObj;
+        return new loginRecs(this.page);
     }
     getStrategyObj(){
-        return this.strategyObj;
+        return new strategy(this.page);
     }
-    getPremiumCommonObj(){
-        return this.premiumCommonObj;
-    }
+   
     
 }

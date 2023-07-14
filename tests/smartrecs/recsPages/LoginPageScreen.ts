@@ -1,24 +1,26 @@
-import { expect } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 
 /**
  * This class holds all the login page related locators and login functionalities
  */
 export class loginRecs {
 
-   readonly page;
-   readonly userName;
-   readonly password;
-   readonly submitBtn;
-   readonly userProfileIcon;
-   readonly errorMsgForLogin;
+   readonly page:Page;
+   readonly userName:Locator;
+   readonly password:Locator;
+   readonly submitBtn:Locator;
+   readonly userProfileIcon:Locator;
+   readonly errorMsgForLogin:Locator;
+   readonly keyIconOnPassword:Locator;
 
-   constructor(page) {
+   constructor(page:Page) {
       this.page = page;
       this.userName = this.page.locator("input[placeholder='Username...']");
       this.password = this.page.locator("//input[@placeholder='Password...']");
       this.submitBtn = this.page.locator("//button[@type='submit']");
       this.userProfileIcon = this.page.locator("li[tooltip-placement='bottom']")
       this.errorMsgForLogin = this.page.locator("//tlmv-alert//span[normalize-space(text())='Invalid username or password.']")
+      this.keyIconOnPassword = this.page.locator("//i[contains(@class,'key')]");
    }
 
    /**
@@ -29,10 +31,12 @@ export class loginRecs {
    async navigateAndFillLoginForm(username: string, passWord: string) {
       await this.page.goto('/recs-ui/');
       await expect(this.page).toHaveTitle("IdpUi");
+      await this.keyIconOnPassword.waitFor();
       await this.userName.fill(username);
       await this.password.fill(passWord);
       await this.submitBtn.click();
       await this.page.waitForLoadState();
+    
    }
 
    /**

@@ -1,3 +1,5 @@
+import { Page } from "@playwright/test";
+
 /**
  * Navigation to all dashboards are handled here. Post login screen
  */
@@ -5,7 +7,7 @@ export class navigateToDashboardRECS
 {
     readonly page;
     readonly functionalUser;
-    constructor(page)
+    constructor(page:Page)
     {
             this.page = page;
             
