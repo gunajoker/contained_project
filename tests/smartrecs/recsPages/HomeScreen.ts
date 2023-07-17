@@ -3,7 +3,7 @@ import { Page } from "@playwright/test";
 /**
  * Navigation to all dashboards are handled here. Post login screen
  */
-export class navigateToDashboardRECS
+export class HomeScreen
 {
     readonly page;
     readonly functionalUser;

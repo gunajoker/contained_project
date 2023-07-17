@@ -1,5 +1,5 @@
-import { Page, test, Expect, expect, Locator } from "@playwright/test";
-import {navigateToDashboardRECS} from "../recsPages/HomeScreen"
+import { Page,  expect, Locator } from "@playwright/test";
+import {HomeScreen as HomeScreenObj } from "../recsPages/HomeScreen"
 
 /**
  *  single pass name and its position . used with Type:passes as an array to validate all pass list in a strategy
@@ -17,13 +17,12 @@ type passes = pass[];
 /**
  * Strategy related all locators and functionalities are stored here
  */
-export class strategy
+export class ReconciliationStrategy
 {
     readonly page:Page;
     readonly searchStrategybox:Locator;
     readonly createStrategyBtn:Locator;
     readonly attributes:Locator;
-    readonly navigationObj:navigateToDashboardRECS;
     readonly lastStrategy:Locator;
     readonly strategyCountOnHeading:Locator;
 
@@ -34,7 +33,6 @@ constructor(page:Page)
     this.createStrategyBtn = this.page.locator("//*[contains(@class, 'btn')][normalize-space(.)='Create Reconciliation Strategy']");
     this.attributes = this.page.locator("//*[@data-locator='attributes-tab']//div[@uib-tooltip]");
     this.lastStrategy = this.page.locator("//b[@uib-tooltip]").last();
-    this.navigationObj = new navigateToDashboardRECS(this.page);
     this.strategyCountOnHeading = this.page.locator("//h1/small");
 }
 
@@ -54,7 +52,7 @@ async NavigateToReconciliationStrategy() {
     // nav.networkwait(page);
     // const objrepo = new ObjectServer(this.page);
     // this.navigationObj = new navigateToDashboardRECS(this.page);
-    await this.navigationObj.navigateToDashboard("Reconciliation Strategies");
+    await new HomeScreenObj(this.page).navigateToDashboard("Reconciliation Strategies");
     await this.ReconciliationHomePageLoaded();
 
 }

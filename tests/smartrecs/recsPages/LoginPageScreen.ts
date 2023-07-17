@@ -1,9 +1,10 @@
 import { Locator, Page, expect } from '@playwright/test';
 
+
 /**
  * This class holds all the login page related locators and login functionalities
  */
-export class loginRecs {
+export class LoginPage {
 
    readonly page:Page;
    readonly userName:Locator;
