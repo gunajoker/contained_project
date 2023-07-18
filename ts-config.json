@@ -6,7 +6,10 @@
       "strictPropertyInitialization": true,
       "strictFunctionTypes": true,
       "noImplicitThis": true,
-      "alwaysStrict": true
+      "alwaysStrict": true,
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true
     }
   }
   

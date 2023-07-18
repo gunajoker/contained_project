@@ -29,6 +29,7 @@ export default defineConfig({
   use: {
     browserName: "chromium",
     /* Base URL to use in actions like `await page.goto('/')`. */
+    // baseURL: "http://192.168.200.11:7001/",
     baseURL: "http://192.168.200.11:7001/",
     headless: false,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */

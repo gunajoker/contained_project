@@ -33,8 +33,8 @@ export class LoginPage {
       await this.page.goto('/recs-ui/');
       await expect(this.page).toHaveTitle("IdpUi");
       await this.keyIconOnPassword.waitFor();
-      await this.userName.fill(username);
-      await this.password.fill(passWord);
+      await this.userName.type(username);
+      await this.password.type(passWord);
       await this.submitBtn.click();
       await this.page.waitForLoadState();
     

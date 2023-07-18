@@ -1,6 +1,7 @@
 import {test } from "../customfixture/CustFixture"
 
-test("op",async({page,loginRecs,homeScreen})=>{
+test("op",async({page,loginRecs,reconciliation})=>{
     await loginRecs.loginIntoRecsUI("user5","password");
-    await homeScreen.navigateToDashboard("Reconciliations");
+    await reconciliation.navigateToReconciliationPage();
+    
 })

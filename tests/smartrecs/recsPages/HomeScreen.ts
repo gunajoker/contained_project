@@ -5,7 +5,7 @@ import { Page } from "@playwright/test";
  */
 export class HomeScreen
 {
-    readonly page;
+    readonly page:Page;
     readonly functionalUser;
     constructor(page:Page)
     {
