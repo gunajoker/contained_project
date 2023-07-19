@@ -1,4 +1,5 @@
 import { Locator, Page, expect } from '@playwright/test';
+import { env } from '../utils/env';
 
 
 /**
@@ -45,9 +46,12 @@ export class LoginPage {
  * @param username - username is a string 
 * @param passWord - password is a string
 */
-   async loginIntoRecsUI(username: string, passWord: string) {
-      await this.navigateAndFillLoginForm(username, passWord);
+   async loginIntoRecsUI(userType:string) {
+      if (userType ==="functionalUser")
+      {
+      await this.navigateAndFillLoginForm(env.functionalUsername, env.functionalUserpassword);
       await this.userProfileIcon.waitFor();
+      }
    }
 
    /**

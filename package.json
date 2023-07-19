@@ -4,18 +4,20 @@
   "description": "",
   "main": "home.js",
   "scripts": {
-    "regression": "npx playwright test",
-    "reconciliation": "npx playwright test Reconciliation.spec.ts",
-    "product": "npx playwright test Products.spec.ts"
+    "regression": "cross-env test_env=jenkins npx playwright test",
+    "reconciliation": "cross-env test_env=jenkins npx playwright test Reconciliation.spec.ts",
+    "product": "cross-env test_env=jenkins playwright test Products.spec.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.35.1"
+    "@playwright/test": "^1.35.1",
+    "cross-env": "^7.0.3"
   },
   "dependencies": {
     "chalk": "^5.3.0",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "dotenv-expand": "^10.0.0"
   }
 }

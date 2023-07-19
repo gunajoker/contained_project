@@ -14,7 +14,7 @@ const tlmCashAutoMatchStrategyPasses = [
 ];
 
 test("@Regression- Verify pass details on strategy", async ({ page ,loginRecs,reconciliationStrategy ,homeScreen }) => {
-  await loginRecs.loginIntoRecsUI(userName, password);
+  await loginRecs.loginIntoRecsUI("functionalUser");
   await reconciliationStrategy.NavigateToReconciliationStrategy();;
   await reconciliationStrategy.viewStrategy(tlmCashAutoMatchStrategy);
   await reconciliationStrategy.verifyPassDetails(tlmCashAutoMatchStrategyPasses);
@@ -22,7 +22,7 @@ test("@Regression- Verify pass details on strategy", async ({ page ,loginRecs,re
 });
 
 test("@Regression- Verify pass details on Cash Strategy", async ({ page,loginRecs,reconciliationStrategy,homeScreen  }) => {
-  await loginRecs.loginIntoRecsUI(userName, password);
+  await loginRecs.loginIntoRecsUI("functionalUser");
   await reconciliationStrategy.NavigateToReconciliationStrategy();;
   await reconciliationStrategy.viewStrategy(tlmCashAutoMatchStrategy);
   await reconciliationStrategy.verifyPassDetails(tlmCashAutoMatchStrategyPasses);

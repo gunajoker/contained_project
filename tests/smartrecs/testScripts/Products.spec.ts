@@ -1,7 +1,7 @@
 import {test } from "../customfixture/CustFixture"
 
 test("Products smoke test",async({loginRecs,product,pagination,lookups,homeScreen})=>{
-    await loginRecs.loginIntoRecsUI("user5","password");
+    await loginRecs.loginIntoRecsUI("functionalUser");
     // Navigating to lookups page
     await homeScreen.navigateToDashboard("Lookups");
     await lookups.waitTilTableIsLoaded("business-entity");
@@ -23,6 +23,5 @@ test("Products smoke test",async({loginRecs,product,pagination,lookups,homeScree
     await pagination.moveToNthPageByEnteringPageNumber("4");
 
 })
-test("testcaseName",async ({page})=>{
 
-})
+

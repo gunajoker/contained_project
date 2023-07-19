@@ -1,5 +1,5 @@
-import { defineConfig, devices } from "@playwright/test";
-
+import { defineConfig, devices, Config } from "@playwright/test";
+import { env } from "./tests/smartrecs/utils/env";
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -26,12 +26,13 @@ export default defineConfig({
     timeout: 30 * 1000,
   },
   
+  
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     browserName: "chromium",
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: "http://192.168.200.11:7001/",
-    baseURL: "http://192.168.200.11:7001/",
+    baseURL: `${env.baseurl}`,
     headless: false,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on",
@@ -39,9 +40,10 @@ export default defineConfig({
     // globalTimeout: 60*60*1000,
     actionTimeout: 30 * 1000,
     navigationTimeout: 30 * 1000,
-    testIdAttribute: 'data-locator'
+    testIdAttribute: 'data-locator',
+    // ...devices["Desktop Chrome"]
   },
-
+    globalSetup :"./tests/smartrecs/utils/GlobalSetup.ts"
   // projects: [
   //   {
   //     name: "chromium",
