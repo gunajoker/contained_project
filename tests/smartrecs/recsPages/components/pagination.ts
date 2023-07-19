@@ -1,7 +1,8 @@
 import { Locator, Page ,expect} from "@playwright/test";
 
 /**
- * Create an object of this class and use all the methods to test the tlm view pagination control
+ * Configure data locator by calling this method - paginationConfigureLocators(data-locator) 
+ * & use all the methods to test the tlm view pagination control
  */
 
 export class Pagination
@@ -21,7 +22,6 @@ export class Pagination
     /**
      * This class performs all actions related to the pagination control. use this method to initialize pagination - paginationConfigureLocators .
      * @param page              --> Page object should be passed
-     * @param paginationLocator --> Parent element of the tlmv-pagination-controls element's data locator should be passed
      */
     constructor(page:Page)
     {
@@ -39,6 +39,7 @@ export class Pagination
         this.paginationJumperSpan = this.paginationJumper.locator("//tlmv-editable-text//span");
         this.paginationJumperGoIcon=this.paginationJumper.locator("//tlmv-icon[@icon='caret-right']");
         this.paginationJumperInput = this.paginationJumper.locator("//input");
+        
     }
 
     /**

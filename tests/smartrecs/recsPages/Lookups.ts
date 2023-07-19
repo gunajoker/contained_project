@@ -1,38 +1,29 @@
-import {Locator, Page} from "@playwright/test"
-import { HomeScreen } from "./HomeScreen";
+import {Locator, Page, expect} from "@playwright/test"
 
 export class Lookups
 {
     readonly page:Page
-    readonly businessEntityResultList:Locator;
     constructor(page:Page)
     {
-        this.page=page;
-        this.businessEntityResultList = this.page.locator("//*[@data-locator='business-entity']//tr");
+        this.page=page;  
     }
 
-    async navigateToLookupsPage()
-    {
-        const homeScreenObj = new HomeScreen(this.page);
-        homeScreenObj.navigateToDashboard("Lookups");
-        await this.waitTilBusinessEntityResultIsLoaded();
-    }
 
     async switchToTabInLookups(switchTab:string)
     {
         var temp =this.page.locator(`//*[@data-locator="static-data-page-body"]//nav//span[normalize-space(text())='${switchTab}']/parent::a`);
         await temp.click();
     }
-    
    
     async waitTilTableIsLoaded(tableDataLocator:string)
     {
-       var temp = this.page.locator(`//*[@data-locator='${tableDataLocator}']//tr`); 
+       await this.page.locator(`//*[@data-locator='${tableDataLocator}']//tr`).last().waitFor();
     }
-
-    async waitTilBusinessEntityResultIsLoaded()
+    
+    async verifyOnlyExpectedNoOfItemsAreDisplayed(tab:string,countOfExpectedItems:number)
     {
-        await this.businessEntityResultList.last().waitFor();
+      const countOfActualItems= await this.page.locator(`//*[@data-locator="${tab}"]//*[@data-locator="ellipsis-button"]`).count();
+      await expect(countOfActualItems).toBe(countOfExpectedItems);
     }
 
 }

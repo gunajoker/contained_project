@@ -1,13 +1,18 @@
 import {test } from "../customfixture/CustFixture"
 
-test("Products smoke test",async({loginRecs,product,pagination,lookups})=>{
+test("Products smoke test",async({loginRecs,product,pagination,lookups,homeScreen})=>{
     await loginRecs.loginIntoRecsUI("user5","password");
-    await lookups.navigateToLookupsPage();
+    // Navigating to lookups page
+    await homeScreen.navigateToDashboard("Lookups");
+    await lookups.waitTilTableIsLoaded("business-entity");
+    // Switching to products tab
     await lookups.switchToTabInLookups("PRODUCTS");
     await lookups.waitTilTableIsLoaded("product-tab");
+    // Testing the pagination in products tab
     await pagination.paginationConfigureLocators("product-list");
     await pagination.applyPageSizeFilter("5");
     await pagination.verifyPageSizeFilterIsApplied("5");
+    await lookups.verifyOnlyExpectedNoOfItemsAreDisplayed("product-tab",5);
     await pagination.moveToNextPage();
     await pagination.verifyPageIsSelected("2");
     await pagination.moveToPreviousPage();
@@ -16,4 +21,8 @@ test("Products smoke test",async({loginRecs,product,pagination,lookups})=>{
     await pagination.validateTotalNoOfPages("6 pages")
     await pagination.moveToNthPageByClickingOnPageNumber("6");
     await pagination.moveToNthPageByEnteringPageNumber("4");
+
+})
+test("testcaseName",async ({page})=>{
+
 })

@@ -25,6 +25,7 @@ export default defineConfig({
   expect: {
     timeout: 30 * 1000,
   },
+  
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     browserName: "chromium",
@@ -38,6 +39,7 @@ export default defineConfig({
     // globalTimeout: 60*60*1000,
     actionTimeout: 30 * 1000,
     navigationTimeout: 30 * 1000,
+    testIdAttribute: 'data-locator'
   },
 
   // projects: [

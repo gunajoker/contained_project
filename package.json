@@ -6,7 +6,7 @@
   "scripts": {
     "regression": "npx playwright test",
     "reconciliation": "npx playwright test Reconciliation.spec.ts",
-    "product":"npx playwright test Products.spec.ts"
+    "product": "npx playwright test Products.spec.ts"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
     "@playwright/test": "^1.35.1"
   },
   "dependencies": {
+    "chalk": "^5.3.0",
     "dotenv": "^16.3.1"
   }
 }
