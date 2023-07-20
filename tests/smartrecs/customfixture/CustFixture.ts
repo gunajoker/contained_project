@@ -16,9 +16,11 @@ type Fixtures = {
    lookups:Lookups,
    pagination:Pagination
 }
+// custom fixtures are created here using the extend method
 
 export const test = base.extend<Fixtures>({
    loginRecs: async ({page},use) => {
+      // use --> starts automation execution . here with the new object  
    await use(new LoginPage(page));
    },
    reconciliationStrategy: async ({page},use) => {

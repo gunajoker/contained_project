@@ -6,7 +6,7 @@
   "scripts": {
     "regression": "cross-env test_env=jenkins npx playwright test",
     "reconciliation": "cross-env test_env=jenkins npx playwright test Reconciliation.spec.ts",
-    "product": "cross-env test_env=jenkins playwright test Products.spec.ts"
+    "product": "cross-env test_env=jenkins playwright test Products.spec.ts --ui"
   },
   "keywords": [],
   "author": "",
@@ -20,4 +20,5 @@
     "dotenv": "^16.3.1",
     "dotenv-expand": "^10.0.0"
   }
+  
 }
